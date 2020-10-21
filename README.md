@@ -26,24 +26,24 @@
 | category        | text       | null: false       |
 | price           | text       | null: false       |
 | seller          | text       | null: false       |
-| description     | text       | null: false       |
-| delivery_charge | text       | null: false       |
-| area            | text       | null: false       |
-| days            | text       | null: false       |
-| user            | references | foreign_key: true |
+| description     | integer    | null: false       |
+| delivery_charge | integer    | null: false       |
+| area            | integer    | null: false       |
+| days            | integer    | null: false       |
+| user_id         | integer    | foreign_key: true |
 
 ## Association
 - belongs_to:user
-- has_many:purchase_records
+- has_one:purchase_records
 - 
 
 
 ## purchase_records テーブル
 
-| Column          | Type        | Options          |
-| --------------- | ----------- | ---------------- |
-| user            | references  | foreign_key: true|
-| item            | references  | foreign_key: true|
+| Column             | Type        | Options          |
+| ---------------    | ----------- | ---------------- |
+| user_id            | integer     | foreign_key: true|
+| item_id            | integer     | foreign_key: true|
 
 
 ## Association
@@ -54,16 +54,16 @@
 
 ## shipping_address テーブル
 
-| Column          | Type         | Options          |
-| --------------- | ------------ | ---------------- |
-| postal_code     |   text       | null: false      |
-| prefectures     |  integer     | null: false      |
-| municipality    |   string     | null: false      |
-| address         |   string     | null: false      |
-| building_name   |   string     | null: false      |
-| phone_number    |   text       | null: false      |
-| purchase_record | references   | foreign_key: true|
+| Column             | Type         | Options          |
+| ------------------ | ------------ | ---------------- |
+| postal_code        |   text       | null: false      |
+| prefecture         |    integer   | null: false      |
+| municipality       |   string     | null: false      |
+| address            |   string     | null: false      |
+| building_name      |   string     |                  |
+| phone_number       |   string     | null: false      |
+| purchase_record_id | integer      | foreign_key: true|
 
 ## Association
- - has_one:purchase_record
+ - belongs_to:purchase_record
  - 
