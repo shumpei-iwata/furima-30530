@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-| Column          | Type    | Options        |
-| --------------- | ------- | -------------- |
-| nickname        | string  | null: false    |
-| email           | string  | null: false    |
-| password        | string  | null: false    |
-| last_name       | string  | null: false    |
-| fist_name       | string  | null: false    |
-| last_name_kana  | string  | null: false    |
-| fist_name_kana  | string  | null: false    |
-| birthday        | date    | null: false    |
+| Column            | Type    | Options        |
+| ---------------   | ------- | -------------- |
+| nickname          | string  | null: false    |
+| email             | string  | null: false    |
+| encrypted_password| string  | null: false    |
+| last_name         | string  | null: false    |
+| fist_name         | string  | null: false    |
+| last_name_kana    | string  | null: false    |
+| fist_name_kana    | string  | null: false    |
+| birthday          | date    | null: false    |
 
 ## Association
 - has_many :purchase_records
@@ -20,16 +20,17 @@
 
 ## items テーブル
 
-| Column          | Type       | Options                      |
-| --------------- | ---------- | ---------------------------- |
-| product_name    | string     | null: false                  |
-| category_id     | integer    | null: false                  |
-| price           | integer    | null: false                  |
-| description     | text       | null: false                  |
-| delivery_charge | integer    | null: false                  |
-| area            | integer    | null: false                  |
-| days            | integer    | null: false                  |
-| user_id         | integer    | foreign_key: true, null:false|
+| Column             | Type       | Options                      |
+| ------------------ | ---------- | ---------------------------- |
+| product_name       | string     | null: false                  |
+| category_id        | integer    | null: false                  |
+| price              | integer    | null: false                  |
+| description        | text       | null: false                  |
+| states             | integer    | null: false                  |
+| delivery_charge_id | integer    | null: false                  |
+| area_id            | integer    | null: false                  |
+| days id            | integer    | null: false                  |
+| user_id            | integer    | foreign_key: true, null:false|
 
 ## Association
 - belongs_to:user
