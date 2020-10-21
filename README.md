@@ -1,24 +1,62 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column          | Type    | Options        |
+| --------------- | ------- | -------------- |
+| nickname        | string  | null: false    |
+| email           | string  | null: false    |
+| password        | string  | null: false    |
+| last_name       | text    | null: false    |
+| fist_name       | text    | null: false    |
+| birthday        | text    | null: false    |
 
-* Ruby version
+## Association
+- has_many :purchase_record
+- has_many :items
 
-* System dependencies
 
-* Configuration
+## items テーブル
 
-* Database creation
+| Column          | Type       | Options           |
+| --------------- | ---------- | ----------------- |
+| image           |            |                   |
+| product_name    | text       | null: false       |
+| category        | text       | null: false       |
+| price           | text       | null: false       |
+| seller          | text       | null: false       |
+| user            | references | foreign_key: true |
 
-* Database initialization
+## Association
+- belongs_to:user
+- has_many:
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## purchase_record テーブル
 
-* Deployment instructions
+| Column          | Type        | Options          |
+| --------------- | ----------- | ---------------- |
+| purchase_date   | text        | null: false      |
+| user            | references  | foreign_key: true|
+| items           | references  | foreign_key: true|
 
-* ...
+
+## Association
+- belongs_to:user
+- belongs_to:items
+
+
+## shipping_address テーブル
+
+| Column          | Type         | Options        |
+| --------------- | ------------ | -------------- |
+| postal_code     |   text       | null: false    |
+| prefectures     |   text       | null: false    |
+| municipality    |   text       | null: false    |
+| address         |   text       | null: false    |
+| building_name   |   text       | null: false    |
+| phone_number    |   text       | null: false    |
+
+## Association
+ - belongs_to:purchase_record
+ - 
