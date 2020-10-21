@@ -26,7 +26,7 @@
 | category_id        | integer    | null: false                  |
 | price              | integer    | null: false                  |
 | description        | text       | null: false                  |
-| states             | integer    | null: false                  |
+| states_id          | integer    | null: false                  |
 | delivery_charge_id | integer    | null: false                  |
 | area_id            | integer    | null: false                  |
 | days id            | integer    | null: false                  |
