@@ -10,12 +10,12 @@ class User < ApplicationRecord
   validates :nickname, presence: true
   validates :email, presence: true
   validates :birthday, presence: true
-  
+
   with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: 'please use double-byte characters' } do
     validates :last_name, presence: true
     validates :fist_name, presence: true
   end
-  with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: 'please use full-width katakana characters' } do
+  with_options presence: true, format: { with: /\A([ァ-ン]|ー)+\z/,message: 'please use full-width katakana characters' } do
     validates :last_name_kana, presence: true
     validates :fist_name_kana, presence: true
   end

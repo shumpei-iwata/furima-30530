@@ -7,10 +7,35 @@ RSpec.describe User, type: :model do
 
   describe '新規登録' do
     context '新規登録が上手く行くとき' do
-      it '全ての情報がある時' do
+      it "nicknameとemail、passwordとpassword_confirmationが存在すれば登録できる" do
+        expect(@user).to be_valid
       end
-    end
-
+      it "passwordが6文字以上で英数混合であれば登録できる" do
+        @user.password = "000aaa"
+        @user.password_confirmation = "000aaa"
+        expect(@user).to be_valid
+      end
+      it "last_nameが存在していれば登録できる" do
+        @user.last_name = "山田"
+        expect(@user).to be_valid
+      end
+      it "fist_nameが存在していれば登録できる" do
+        @user.fist_name = "太郎"
+        expect(@user).to be_valid
+      end
+      it "last_name_kanaが存在していれば登録できる" do
+        @user.last_name_kana = "ヤマダ"
+        expect(@user).to be_valid
+      end
+      it "fist_name_kanaが存在していれば登録できる" do
+        @user.fist_name_kana = "タロウ"
+        expect(@user).to be_valid
+      end
+      it "birthdayが存在していれば登録できる" do
+        @user.birthday = "2020-4-1"
+        expect(@user).to be_valid
+      end
+    end  
     context '新規登録が上手くいかないとき' do
       it 'nicknameが空だと登録できない' do
         @user.nickname = ''
@@ -97,6 +122,16 @@ RSpec.describe User, type: :model do
       end
       it 'fist_name_kanaが半角だと登録できない' do
         @user.fist_name_kana = 'ﾀﾛｳ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Fist name kana please use full-width katakana characters')
+      end
+      it 'last_name_kanaがひらがなだと登録できない' do
+        @user.last_name_kana = 'やまだ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name kana please use full-width katakana characters')
+      end
+      it 'fist_name_kanaがひらがなだと登録できない' do
+        @user.fist_name_kana = 'たろう'
         @user.valid?
         expect(@user.errors.full_messages).to include('Fist name kana please use full-width katakana characters')
       end
