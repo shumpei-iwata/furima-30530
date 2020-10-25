@@ -63,3 +63,4 @@ end
 
 gem 'sprockets'
 gem 'devise'
+gem 'active_hash'
