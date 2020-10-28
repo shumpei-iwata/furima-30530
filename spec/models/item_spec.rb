@@ -1,108 +1,72 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-    before do
-      @item = FactoryBot.build(:item)
-    
-    end
-
-describe '商品出品' do
-  context '商品出品が上手く行くとき' do
-    it "product_nameがある時出品できる" do
-      @item.product_name = "aアあ亜1"
-      expect(@item).to be_valid
-    end
- 
-    it "imageがある時出品できる" do
-      expect(@item).to be_valid
-    end
-
-    it "descriptionが存在している時出品できる" do
-       @item.description = "aアあ亜1"
-       expect(@item).to be_valid
-    end
-
-    it "category_idが存在してる時出品できる" do
-       @item.category_id = 2
-       expect(@item).to be_valid
-    end
-
-    it "states_idが存在してる時出品できる" do
-      @item.states_id = 2
-      expect(@item).to be_valid
-    end
-
-    it "delivery_charge_idが存在している時出品できる" do
-      @item.delivery_charge_id = 2
-      expect(@item).to be_valid
-    end
-
-    it "area_idが存在している時出品できる" do
-      @item.area_id = 2
-      expect(@item).to be_valid
-    end
-
-    it "priceが存在している時出品できる" do
-      @item.price = 300
-      expect(@item).to be_valid
-    end
+  before do
+    @item = FactoryBot.build(:item)
   end
 
+  describe '商品出品' do
+    context '商品出品が上手く行くとき' do
+      it 'product_nameがある時出品できる' do
+        @item.product_name = 'aアあ亜1'
+        expect(@item).to be_valid
+      end
+    end
 
     context '商品出品ができない場合' do
-      it "product_nameがない時出品できない" do
-      @item.product_name = ''
+      it 'product_nameがない時出品できない' do
+        @item.product_name = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Product name can't be blank")
       end
 
-      it "descriptionがない時出品できない" do
+      it 'descriptionがない時出品できない' do
         @item.description = ''
-          @item.valid?
-          expect(@item.errors.full_messages).to include("Description can't be blank")
-      end 
-      
-      it "imageがない時出品できない" do
-        @item.image = nil
-          @item.valid?
-          expect(@item.errors.full_messages).to include("Image can't be blank")
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Description can't be blank")
       end
-      
-      it "category_idがない時出品できない" do
+
+      it 'imageがない時出品できない' do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
+
+      it 'category_idがない時出品できない' do
         @item.category_id = '---'
-          @item.valid?
-          expect(@item.errors.full_messages).to include("Category is not a number")
-      end   
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Category is not a number')
+      end
 
-      it "area_idがない時出品できない" do
+      it 'area_idがない時出品できない' do
         @item.area_id = '---'
-          @item.valid?
-          expect(@item.errors.full_messages).to include("Area is not a number")
-      end 
-      
-      it "states_idがない時出品できない" do
-        @item.states_id = '---'
-          @item.valid?
-          expect(@item.errors.full_messages).to include("States is not a number")
-      end  
-      
-      it "day_idがない時出品できない" do
-        @item.day_id = '---'
-          @item.valid?
-          expect(@item.errors.full_messages).to include("Day is not a number")
-      end 
-      
-      it "delivery_charge_idがない時出品できない" do
-        @item.delivery_charge_id = '---'
-          @item.valid?
-          expect(@item.errors.full_messages).to include("Delivery charge is not a number")
-      end 
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Area is not a number')
+      end
 
-      it "priceがない時出品できない" do
+      it 'states_idがない時出品できない' do
+        @item.states_id = '---'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('States is not a number')
+      end
+
+      it 'day_idがない時出品できない' do
+        @item.day_id = '---'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Day is not a number')
+      end
+
+      it 'delivery_charge_idがない時出品できない' do
+        @item.delivery_charge_id = '---'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Delivery charge is not a number')
+      end
+
+      it 'priceがない時出品できない' do
         @item.price = ''
-          @item.valid?
-          expect(@item.errors.full_messages).to include("Price can't be blank")
-      end 
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
     end
   end
 end
