@@ -8,7 +8,6 @@ RSpec.describe Item, type: :model do
   describe '商品出品' do
     context '商品出品が上手く行くとき' do
       it 'product_nameがある時出品できる' do
-        @item.product_name = 'aアあ亜'
         expect(@item).to be_valid
       end
     end
@@ -99,7 +98,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが299円以下では出品できない' do
-        @item.price = 100
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Out of setting range")
       end
@@ -109,7 +108,12 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Out of setting range")
       end
-      
+
+      it 'priceが半角数字ではないと出品できない' do
+        @item.price = '１２００'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Out of setting range")
+      end
     end
   end
 end

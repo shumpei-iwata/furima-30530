@@ -27,7 +27,7 @@ class Item < ApplicationRecord
   end
 
   with_options presence: true do
-    validates :price, numericality: { with: /\A[0-9]+\z/ , greater_than: 299, less_than:9999999, message: "Out of setting range"}
+    validates :price, numericality: { with: /\A[0-9]+\z/ , greater_than: 299, less_than:10000000, message: "Out of setting range"}
     
   end
   belongs_to :user
