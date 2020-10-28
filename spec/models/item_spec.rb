@@ -8,7 +8,7 @@ RSpec.describe Item, type: :model do
   describe '商品出品' do
     context '商品出品が上手く行くとき' do
       it 'product_nameがある時出品できる' do
-        @item.product_name = 'aアあ亜1'
+        @item.product_name = 'aアあ亜'
         expect(@item).to be_valid
       end
     end
@@ -33,33 +33,63 @@ RSpec.describe Item, type: :model do
       end
 
       it 'category_idがない時出品できない' do
-        @item.category_id = '---'
+        @item.category_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('Category is not a number')
       end
 
+      it 'category_idが1の時出品できない' do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
+
       it 'area_idがない時出品できない' do
-        @item.area_id = '---'
+        @item.area_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('Area is not a number')
       end
 
+      it 'area_idが1の時出品できない' do
+        @item.area_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Area must be other than 1")
+      end
+
       it 'states_idがない時出品できない' do
-        @item.states_id = '---'
+        @item.states_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('States is not a number')
       end
 
+      it 'states_idが1の時出品できない' do
+        @item.states_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('States must be other than 1')
+      end
+
       it 'day_idがない時出品できない' do
-        @item.day_id = '---'
+        @item.day_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('Day is not a number')
       end
 
+      it 'day_idが1の時出品できない' do
+        @item.day_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Day must be other than 1")
+      end
+
       it 'delivery_charge_idがない時出品できない' do
-        @item.delivery_charge_id = '---'
+        @item.delivery_charge_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('Delivery charge is not a number')
+      end
+
+      it 'delivery_charge_idが1の時出品できない' do
+        @item.delivery_charge_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery charge must be other than 1")
       end
 
       it 'priceがない時出品できない' do
@@ -67,6 +97,19 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
+
+      it 'priceが299円以下では出品できない' do
+        @item.price = 100
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Out of setting range")
+      end
+
+      it 'priceが10000000円以上では出品できない' do
+        @item.price = 10000000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Out of setting range")
+      end
+      
     end
   end
 end

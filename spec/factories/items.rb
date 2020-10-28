@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :item do
     association :user
 
-    product_name { 'aあア亜1' }
+    product_name { 'aあア亜' }
     description { 'a亜あア1' }
     price { 300 }
     category_id { 2 }

@@ -26,8 +26,9 @@ class Item < ApplicationRecord
   validates :day_id
   end
 
-  with_options presence: true, format: { with: /\A[-]?[0-9]+(\.[0-9]+)?\z/, message: 'please type using half-width characters' } do
-    validates :price, presence: true
+  with_options presence: true do
+    validates :price, numericality: { with: /\A[0-9]+\z/ , greater_than: 299, less_than:9999999, message: "Out of setting range"}
+    
   end
   belongs_to :user
 end
