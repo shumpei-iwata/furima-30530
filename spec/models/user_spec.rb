@@ -7,35 +7,35 @@ RSpec.describe User, type: :model do
 
   describe '新規登録' do
     context '新規登録が上手く行くとき' do
-      it "nicknameとemail、passwordとpassword_confirmationが存在すれば登録できる" do
+      it 'nicknameとemail、passwordとpassword_confirmationが存在すれば登録できる' do
         expect(@user).to be_valid
       end
-      it "passwordが6文字以上で英数混合であれば登録できる" do
-        @user.password = "000aaa"
-        @user.password_confirmation = "000aaa"
+      it 'passwordが6文字以上で英数混合であれば登録できる' do
+        @user.password = '000aaa'
+        @user.password_confirmation = '000aaa'
         expect(@user).to be_valid
       end
-      it "last_nameが存在していれば登録できる" do
-        @user.last_name = "山田"
+      it 'last_nameが存在していれば登録できる' do
+        @user.last_name = '山田'
         expect(@user).to be_valid
       end
-      it "fist_nameが存在していれば登録できる" do
-        @user.fist_name = "太郎"
+      it 'fist_nameが存在していれば登録できる' do
+        @user.fist_name = '太郎'
         expect(@user).to be_valid
       end
-      it "last_name_kanaが存在していれば登録できる" do
-        @user.last_name_kana = "ヤマダ"
+      it 'last_name_kanaが存在していれば登録できる' do
+        @user.last_name_kana = 'ヤマダ'
         expect(@user).to be_valid
       end
-      it "fist_name_kanaが存在していれば登録できる" do
-        @user.fist_name_kana = "タロウ"
+      it 'fist_name_kanaが存在していれば登録できる' do
+        @user.fist_name_kana = 'タロウ'
         expect(@user).to be_valid
       end
-      it "birthdayが存在していれば登録できる" do
-        @user.birthday = "2020-4-1"
+      it 'birthdayが存在していれば登録できる' do
+        @user.birthday = '2020-4-1'
         expect(@user).to be_valid
       end
-    end  
+    end
     context '新規登録が上手くいかないとき' do
       it 'nicknameが空だと登録できない' do
         @user.nickname = ''
@@ -50,7 +50,7 @@ RSpec.describe User, type: :model do
       it 'emailの＠がないと登録できない' do
         @user.email = 'testcom'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
+        expect(@user.errors.full_messages).to include('Email is invalid')
       end
       it 'emailが重複していると登録できない' do
         @user.save

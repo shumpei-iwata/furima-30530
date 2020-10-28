@@ -29,7 +29,7 @@
 | states_id          | integer    | null: false                  |
 | delivery_charge_id | integer    | null: false                  |
 | area_id            | integer    | null: false                  |
-| days id            | integer    | null: false                  |
+| days_id            | integer    | null: false                  |
 | user_id            | integer    | foreign_key: true, null:false|
 
 ## Association
