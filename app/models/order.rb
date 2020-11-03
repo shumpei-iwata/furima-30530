@@ -2,15 +2,13 @@ class Order
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :postal_code, :area_id, :municipality, :address, :building_name, :phone_number
   with_options presence: true do
-    validates :postal_code
+    validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :area_id 
     validates :municipality
     validates :address 
-    validates :phone_number
-
+    validates :phone_number, format: {with: /\d{11}\z/, message: "input only number"}
   end 
-  validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}, allow_blank: true
-  validates :phone_number, format: {with: /\d{11}\z/, message: "input only number"}, allow_blank: true
+
 
   def save
   
