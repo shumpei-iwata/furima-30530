@@ -57,6 +57,11 @@ RSpec.describe Order, type: :model do
         @order.valid?
         expect(@order.errors.full_messages).to include("Area can't be blank")
       end
+      it 'area_idが1だと購入できない' do
+        @order.area_id = 1
+        @order.valid?
+        expect(@order.errors.full_messages).to include('Area must be other than 1')
+      end
       it 'municipalityが空だと購入できない' do
         @order.municipality = nil
         @order.valid?
@@ -74,6 +79,11 @@ RSpec.describe Order, type: :model do
       end
       it 'phone_numberのハイフンがあると購入できない' do
         @order.phone_number = '090-7777-6666'
+        @order.valid?
+        expect(@order.errors.full_messages).to include('Phone number input only number')
+      end
+      it 'phone_numberが12桁以上だと購入できない' do
+        @order.phone_number = '090777766661'
         @order.valid?
         expect(@order.errors.full_messages).to include('Phone number input only number')
       end
