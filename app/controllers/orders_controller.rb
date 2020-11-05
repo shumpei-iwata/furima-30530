@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   before_action :bat_item, only: [:index]
   def index
     if set_item.purchase_record
-      redirect_to root_path 
+       redirect_to root_path
     end
     @order = Order.new
   
@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
   end
 
   def bat_item
-    redirect_to root_path unless user_session == @item.user
+     redirect_to root_path unless user_session == @item.user
   end
 
 
