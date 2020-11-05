@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :create]
   before_action :authenticate_user!, only: [:index]
-  before_action :bat_item, only: [:index]
+  before_action :bat_item, only: [:create, :index]
   def index
     if set_item.purchase_record
        redirect_to root_path
@@ -28,7 +28,9 @@ class OrdersController < ApplicationController
   end
 
   def bat_item
-     redirect_to root_path unless user_session == @item.user
+    if  current_user == @item.user
+     redirect_to root_path 
+    end
   end
 
 
